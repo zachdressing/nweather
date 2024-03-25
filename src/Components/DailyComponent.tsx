@@ -12,7 +12,7 @@ const DailyComponent = () => {
                 <div className="flex flex-col justify-between w-full md:w-1/2 p-8">
                     <div className="flex">
                         <div className="w-1/2 text-xl">^84</div>
-                        <div className="w-1/2 text-xl text-end">3/25/24</div>
+                        <div className="w-1/2 text-lg text-end">3/25/24, Monday</div>
                     </div>
                     <div className="w-full text-7xl lg:text-9xl text-center">80°</div>
                     <div className="flex">
