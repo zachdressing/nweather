@@ -1,5 +1,6 @@
 'use client'
 
+import { ILocale, IWeather } from "@/Interfaces/Interfaces";
 import { TextInput, Button, Popover } from "flowbite-react";
 import React, { useEffect, useState } from 'react'
 
@@ -8,24 +9,28 @@ export default function MainPage() {
 
   //Set the data from the API Calls into the spots on the page
   const [searchVal, setSearchVal] = useState<String>("");
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [location, setLocation] = useState<ILocale>()
+  const [weather, setWeather] = useState<IWeather>()
+  const [forecast, setForecast] = useState()
   const apiKey = '85f5ee4cb9ec8763732f475eee4bf5af';
   let lat: number;
   let lon: number;
+  const currentDate = new Date();
 
 
   const errorFunc = () => {
     console.log('no')
   }
 
-  useEffect(() => {
-    // Update the document title using the browser API
-    //
-    navigator.geolocation.getCurrentPosition(success,errorFunc)
+  const favCheck = ()=>{
 
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success,errorFunc)
   }, []);
 
-  const success = async (position: Iposition) => {
+  const success = async (position) => {
     if (searchVal) {
       const citySearch = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${apiKey}`);
       const cityName = await citySearch.json();
@@ -33,13 +38,6 @@ export default function MainPage() {
       lon = cityName[0].lon;
       console.log(cityName);
     }
-    /*
-    else if (liValue) {
-        const citySearch = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${liValue}&limit=5&appid=${apiKey}`);
-        const cityName = await citySearch.json();
-        lat = cityName[0].lat;
-        lon = cityName[0].lon;
-    }*/
     else {
       //set lat and lon to coords
       lat = position.coords.latitude
@@ -58,6 +56,10 @@ export default function MainPage() {
     const locationPromise = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${apiKey}`)
     const locationData = await locationPromise.json();
     console.log(weatherData, forecastData, locationData)
+    setWeather(weatherData);
+    setForecast(forecastData)
+    setLocation(locationData[0]);
+    
   }
   return (
     <div className="bg-Light dark:bg-Dark min-h-screen pt-12">
@@ -83,7 +85,7 @@ export default function MainPage() {
 
           </div>
           <div className="flex w-1/6 min-w-40 gap-2 m-2">
-            <Button onClick={()=>{success()}} className='w-full rounded-[17px] border-2 border-black' color="blue">
+            <Button onClick={()=>{success(searchVal)}} className='w-full rounded-[17px] border-2 border-black' color="blue">
               Search
             </Button>
           </div>
@@ -95,17 +97,17 @@ export default function MainPage() {
       <div className='flex w-full px-4 py-2 justify-center flex-wrap'>
         <div className='flex flex-col md:flex-row bg-gray-50 min-h-72 w-2/3 min-w-72 border-2 border-black rounded-[17px]'>
           <div className="flex items-center justify-center md:flex-col md:justify-between w-full md:w-1/2 text-center p-8 gap-2">
-            <h1 className='text-5xl lg:text-6xl'>{}</h1>
+            <h1 className='text-5xl lg:text-6xl'>{location && location.state ?  location.name + ', ' + location.state : location && location.name + ', ' + location.country}</h1>
             <a><p className='text-7xl text-red-500 cursor-pointer'>♥</p></a>
           </div>
           <div className="flex flex-col justify-between w-full md:w-1/2 p-8">
             <div className="flex">
-              <div className="w-1/2 text-2xl">^84</div>
+              <div className="w-1/2 text-2xl">{weather && Math.round(weather.main.temp_max) + '°↑'}</div>
               <div className="w-1/2 text-lg text-end">{currentDate.toLocaleDateString('en-US')}</div>
             </div>
-            <div className="w-full text-7xl lg:text-9xl text-center">80°</div>
+            <div className="w-full text-7xl lg:text-9xl text-center">{weather && Math.round(weather.main.temp) + '°'}</div>
             <div className="flex">
-              <div className="w-1/2 text-2xl">v56</div>
+              <div className="w-1/2 text-2xl">{weather && Math.round(weather.main.temp_min)  + '°↓'}</div>
               <div className="w-1/2 text-2xl text-end">{currentDate.toLocaleTimeString()}</div>
             </div>
           </div>
