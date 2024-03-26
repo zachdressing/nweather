@@ -1,13 +1,12 @@
-import DailyComponent from "@/Components/DailyComponent";
-import SearchComponent from "@/Components/SearchComponent";
-import WeeklyComponent from "@/Components/WeeklyComponent";
+import MainPage from '@/Components/page'
+import React from 'react'
 
-export default function Home() {
+const Home = () => {
   return (
-    <div className="bg-Light min-h-screen pt-12">
-      <SearchComponent />
-      <DailyComponent />
-      <WeeklyComponent />
+    <div>
+      <MainPage/>
     </div>
-  );
+  )
 }
+
+export default Home
