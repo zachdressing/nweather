@@ -1,12 +1,3 @@
-export interface IPosition {
-    coords: ICoords
-}
-
-export interface ICoords {
-    latitude: number
-    longitude: number
-}
-
 export interface ILocale {
     name: string;
     local_names: LocalNames;
@@ -18,6 +9,12 @@ export interface ILocale {
 
 export interface LocalNames {
     en: string;
+}
+
+export interface IDay{
+    temp?:number
+    temp_max:number
+    temp_min:number
 }
 
 export interface IWeather {

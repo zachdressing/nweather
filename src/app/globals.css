@@ -11,3 +11,11 @@
 #lg{
   border-radius: 15px;
 }
+
+.page{
+  background-image: url(../Assets/cloudy.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:contain ;
+  background-color: #C1FBFF;
+}
