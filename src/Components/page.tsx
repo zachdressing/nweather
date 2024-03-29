@@ -3,7 +3,7 @@
 import { foreCall, localCall, weatherCall, reverseCall } from "@/DataServices/DataService";
 import { IDay, IForecast, ILocale, IWeather, List } from "@/Interfaces/Interfaces";
 import { TextInput, Button, Popover } from "flowbite-react";
-import {apiKey} from "@/Keys/WeatherAPI"
+//import {apiKey} from "@/Keys/WeatherAPI"
 import React, { Children, useEffect, useState } from 'react'
 
 export default function MainPage() {
@@ -45,7 +45,7 @@ export default function MainPage() {
   useEffect(() => {
     const APIStuff = async () => {
       if (searchVal != "") {
-        let localData = await localCall(searchVal,(process.env.API_KEY? process.env.API_KEY:apiKey))
+        let localData = await localCall(searchVal, process.env.API_KEY);
         if (localData) {
           setLatitude(localData[0].lat);
           setLongitude(localData[0].lon);
@@ -58,9 +58,9 @@ export default function MainPage() {
   useEffect(() => {
     const APIStuff2 = async () => {
       if (latitude != 0 && longitude != 0) {
-        let weatherData = await weatherCall(latitude, longitude, (process.env.API_KEY? process.env.API_KEY:apiKey));
-        let forecastData = await foreCall(latitude, longitude, (process.env.API_KEY? process.env.API_KEY:apiKey));
-        let locationData = await reverseCall(latitude, longitude, (process.env.API_KEY? process.env.API_KEY:apiKey))
+        let weatherData = await weatherCall(latitude, longitude, process.env.API_KEY);
+        let forecastData = await foreCall(latitude, longitude, process.env.API_KEY);
+        let locationData = await reverseCall(latitude, longitude, process.env.API_KEY);
         setWeather(weatherData);
         setForecast(forecastData)
         dateSplitter(forecastData);
