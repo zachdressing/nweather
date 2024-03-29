@@ -3,12 +3,14 @@
 export const weatherCall = async (latitude:number, longitude:number) => {
     const weatherPromise = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=imperial`)
     const weatherData = await weatherPromise.json();
+    console.log(weatherData)
     return weatherData;
 } 
 
 export const foreCall = async (latitude:number, longitude:number) => {
     const forecastPromise = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=imperial`)
     const forecastData = await forecastPromise.json();
+    console.log(forecastData)
     return forecastData;
 }
 

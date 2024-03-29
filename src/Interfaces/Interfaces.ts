@@ -15,6 +15,8 @@ export interface IDay{
     temp?:number
     temp_max:number
     temp_min:number
+    iconURL: string
+    weather_type?: string
 }
 
 export interface IWeather {
