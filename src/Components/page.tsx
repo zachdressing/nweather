@@ -47,7 +47,7 @@ export default function MainPage() {
   useEffect(() => {
     const APIStuff = async () => {
       if (searchVal != "") {
-        let localData = await localCall(searchVal, process.env.API_KEY);
+        let localData = await localCall(searchVal);
         if (localData) {
           setLatitude(localData[0].lat);
           setLongitude(localData[0].lon);
@@ -60,9 +60,9 @@ export default function MainPage() {
   useEffect(() => {
     const APIStuff2 = async () => {
       if (latitude != 0 && longitude != 0) {
-        let weatherData = await weatherCall(latitude, longitude, process.env.API_KEY);
-        let forecastData = await foreCall(latitude, longitude, process.env.API_KEY);
-        let locationData = await reverseCall(latitude, longitude, process.env.API_KEY);
+        let weatherData = await weatherCall(latitude, longitude);
+        let forecastData = await foreCall(latitude, longitude);
+        let locationData = await reverseCall(latitude, longitude);
         setWeather(weatherData);
         setForecast(forecastData)
         dateSplitter(forecastData);
