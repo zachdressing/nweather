@@ -260,13 +260,14 @@ export default function MainPage() {
                     </div>
                     <div className="flex flex-col justify-between text-center  w-full md:w-1/2 p-8">
                         <div className="flex">
-                            <div className="w-1/2 text-2xl text-start">{isClient ? weather && Math.round(weather.main.temp_max) + '°↑' : ""}</div>
-                            <div className="w-1/2 text-lg text-end">{isClient ? currentDate.toLocaleDateString('en-US') : ""}</div>
+                            <div className="w-1/3 text-2xl text-start">{isClient ? weather && Math.round(weather.main.temp_max) + '°↑' : ""}</div>
+                            <div className="w-1/3 text-2xl text-start">{isClient ? <img className="min-w-16 " src={'https://openweathermap.org/img/wn/' + weather?.weather[0].icon + '.png'} alt="icon" /> : ""}</div>
+                            <div className="w-1/3 text-lg text-end">{isClient ? currentDate.toLocaleDateString('en-US') : ""}</div>
                         </div>
                         <div className="w-full text-7xl lg:text-9xl text-center">{weather && Math.round(weather.main.temp) + '°'}</div>
                         <div className="flex">
                             <div className="w-1/2 text-2xl text-start">{isClient ? weather && Math.round(weather.main.temp_min) + '°↓' : ""}</div>
-                            <div className="w-1/2 text-2xl text-end">{isClient ? currentDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : ""}</div>
+                            <div className="w-1/2 text-2xl text-end">{isClient ? currentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ""}</div>
                         </div>
                     </div>
                 </div>
