@@ -1,9 +1,8 @@
 'use client'
 
 import { foreCall, localCall, weatherCall, reverseCall } from "@/DataServices/DataService";
-import { IDay, IForecast, ILocale, IWeather, List } from "@/Interfaces/Interfaces";
+import { IDay, IForecast, ILocale, IWeather} from "@/Interfaces/Interfaces";
 import { TextInput, Button, Popover } from "flowbite-react";
-//import {apiKey} from "@/Keys/WeatherAPI"
 import React, {useEffect, useState } from 'react'
 
 export default function MainPage() {
@@ -36,6 +35,8 @@ export default function MainPage() {
       console.log('no');
     }
     navigator.geolocation.getCurrentPosition(success, errorFunc)
+    let favorites = getLS();
+    setFavArr(favorites);
     setDropdown(favArr && favArr.map((fav) => {
       return (
         <div key={fav} onClick={() => setSearchVal(fav)} className="cursor-pointer hover:bg-gray-300">
