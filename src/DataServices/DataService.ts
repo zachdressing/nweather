@@ -11,7 +11,7 @@ export const foreCall = async (latitude:number, longitude:number) => {
     const forecastData = await forecastPromise.json();
     return forecastData;
 }
-//comment so it might work
+
 export const localCall = async (searchVal:string) =>{
     const localSearch = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchVal}&limit=5&appid=${process.env.NEXT_PUBLIC_API_KEY}`);
         const localData = await localSearch.json();
