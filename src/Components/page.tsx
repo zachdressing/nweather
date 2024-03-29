@@ -4,7 +4,7 @@ import { foreCall, localCall, weatherCall, reverseCall } from "@/DataServices/Da
 import { IDay, IForecast, ILocale, IWeather, List } from "@/Interfaces/Interfaces";
 import { TextInput, Button, Popover } from "flowbite-react";
 //import {apiKey} from "@/Keys/WeatherAPI"
-import React, { Children, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 
 export default function MainPage() {
   const [searchBarVal, setSearchBarVal] = useState<string>("");
@@ -27,6 +27,7 @@ export default function MainPage() {
 
   useEffect(() => {
     setIsClient(true)
+    console.log(process.env.API_KEY)
     const success = (position: any) => {
       setLatitude(position.coords.latitude);
       setLongitude(position.coords.longitude);
